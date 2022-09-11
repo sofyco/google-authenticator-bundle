@@ -21,10 +21,6 @@ final class GoogleAuthenticatorExtension extends Extension
         $userProvider->setAutowired(true);
         $container->setDefinition(UserProvider::class, $userProvider);
 
-        $oauth = new Definition(Oauth2::class);
-        $oauth->setAutowired(true);
-        $container->setDefinition(Oauth2::class, $oauth);
-
         $client = new Definition(Client::class);
         $client->addMethodCall('addScope', [PeopleService::USERINFO_EMAIL]);
         $client->addMethodCall('addScope', [PeopleService::USERINFO_PROFILE]);

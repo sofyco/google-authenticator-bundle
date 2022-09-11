@@ -9,8 +9,11 @@ use Google\Service\PeopleService;
 
 final class AuthenticationGateway
 {
-    public function __construct(private readonly Client $client, private readonly Oauth2 $oauth)
+    private readonly Oauth2 $oauth;
+
+    public function __construct(private readonly Client $client)
     {
+        $this->oauth = new Oauth2($this->client);
     }
 
     public function getAuthenticationUri(): string
