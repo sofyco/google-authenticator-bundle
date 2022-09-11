@@ -57,7 +57,7 @@ final class GoogleAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        $envelope = $this->messageBus->dispatch(new AuthenticationSuccess($token->getUserIdentifier(), $request->getClientIp()));
+        $envelope = $this->messageBus->dispatch(new AuthenticationSuccess($token->getUserIdentifier(), (string) $request->getClientIp()));
 
         $handledStamp = $envelope->last(HandledStamp::class);
 
