@@ -1,4 +1,4 @@
-# Symfony Bundle Template
+# Symfony Google Authenticator Bundle
 
 [![CI](https://github.com/sofyco/google-authenticator-bundle/actions/workflows/ci.yaml/badge.svg)](https://github.com/sofyco/google-authenticator-bundle/actions/workflows/ci.yaml)
 [![codecov](https://codecov.io/gh/sofyco/google-authenticator-bundle/branch/main/graph/badge.svg?token=NL09KRQ74L)](https://codecov.io/gh/sofyco/google-authenticator-bundle)

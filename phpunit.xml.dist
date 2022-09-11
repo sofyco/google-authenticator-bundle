@@ -16,6 +16,9 @@
         <server name="APP_ENV" value="test"/>
         <server name="APP_DEBUG" value="false"/>
         <server name="KERNEL_CLASS" value="Sofyco\Bundle\GoogleAuthenticatorBundle\Tests\App\Kernel"/>
+        <env name="GOOGLE_CLIENT_ID" value=""/>
+        <env name="GOOGLE_CLIENT_SECRET" value=""/>
+        <env name="GOOGLE_REDIRECT_URL" value="https://localhost/security/google"/>
     </php>
 
     <testsuites>
