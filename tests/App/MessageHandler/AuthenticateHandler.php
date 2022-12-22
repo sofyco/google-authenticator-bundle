@@ -17,12 +17,12 @@ final class AuthenticateHandler
 
     public function __invoke(Authenticate $authenticate): ?UserInterface
     {
-        if (self::INVALID_CODE === $authenticate->code) {
+        if (self::INVALID_CODE === $authenticate->token) {
             throw new CustomUserMessageAuthenticationException(self::INVALID_CODE_MESSAGE);
         }
 
-        if (self::VALID_CODE === $authenticate->code) {
-            return new InMemoryUser('khaperets', null, ['ROLE_USER']);
+        if (self::VALID_CODE === $authenticate->token) {
+            return new InMemoryUser('sofyco', null, ['ROLE_USER']);
         }
 
         return null;

@@ -11,7 +11,6 @@ security:
             pattern: ^/security/google
             custom_authenticators:
                 - Sofyco\Bundle\GoogleAuthenticatorBundle\Security\Guard\GoogleAuthenticator
-            entry_point: Sofyco\Bundle\GoogleAuthenticatorBundle\Security\EntryPoint\GoogleRedirectEntryPoint
     access_control:
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 

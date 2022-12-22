@@ -4,9 +4,9 @@ namespace Sofyco\Bundle\GoogleAuthenticatorBundle\Security\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class User implements UserInterface
+final readonly class User implements UserInterface
 {
-    public function __construct(private readonly string $userIdentifier, private readonly array $roles = [])
+    public function __construct(private string $userIdentifier, private array $roles = [])
     {
     }
 

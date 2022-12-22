@@ -2,9 +2,9 @@
 
 namespace Sofyco\Bundle\GoogleAuthenticatorBundle\Message;
 
-final class Authenticate
+final readonly class Authenticate
 {
-    public function __construct(public readonly string $code)
+    public function __construct(public string $token)
     {
     }
 }

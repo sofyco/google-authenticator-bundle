@@ -3,10 +3,8 @@
 namespace Sofyco\Bundle\GoogleAuthenticatorBundle\DependencyInjection;
 
 use Google\Client;
-use Google\Service\Oauth2;
 use Google\Service\PeopleService;
 use Sofyco\Bundle\GoogleAuthenticatorBundle\Gateway\AuthenticationGateway;
-use Sofyco\Bundle\GoogleAuthenticatorBundle\Security\EntryPoint\GoogleRedirectEntryPoint;
 use Sofyco\Bundle\GoogleAuthenticatorBundle\Security\Guard\GoogleAuthenticator;
 use Sofyco\Bundle\GoogleAuthenticatorBundle\Security\Provider\UserProvider;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -28,16 +26,11 @@ final class GoogleAuthenticatorExtension extends Extension
         $client->addMethodCall('setIncludeGrantedScopes', [true]);
         $client->addMethodCall('setClientId', ['%env(GOOGLE_CLIENT_ID)%']);
         $client->addMethodCall('setClientSecret', ['%env(GOOGLE_CLIENT_SECRET)%']);
-        $client->addMethodCall('setRedirectUri', ['%env(GOOGLE_REDIRECT_URL)%']);
         $container->setDefinition(Client::class, $client);
 
         $gateway = new Definition(AuthenticationGateway::class);
         $gateway->setAutowired(true);
         $container->setDefinition(AuthenticationGateway::class, $gateway);
-
-        $entryPoint = new Definition(GoogleRedirectEntryPoint::class);
-        $entryPoint->setAutowired(true);
-        $container->setDefinition(GoogleRedirectEntryPoint::class, $entryPoint);
 
         $authenticator = new Definition(GoogleAuthenticator::class);
         $authenticator->setAutowired(true);

@@ -10,8 +10,8 @@ final class UserRepository implements UserRepositoryInterface
 {
     public function loadByIdentifier(string $identifier): ?UserInterface
     {
-        if ('khaperets' === $identifier) {
-            return new User('khaperets', ['ROLE_USER']);
+        if ('sofyco' === $identifier) {
+            return new User('sofyco', ['ROLE_USER']);
         }
 
         return null;

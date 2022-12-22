@@ -29,13 +29,13 @@ final class GoogleAuthenticator extends AbstractAuthenticator
 
     public function supports(Request $request): ?bool
     {
-        return $request->query->has('code');
+        return $request->query->has('token');
     }
 
     public function authenticate(Request $request): Passport
     {
         try {
-            $envelope = $this->messageBus->dispatch(new Authenticate((string) $request->query->get('code')));
+            $envelope = $this->messageBus->dispatch(new Authenticate((string) $request->query->get('token')));
         } catch (HandlerFailedException $exception) {
             throw new CustomUserMessageAuthenticationException($exception->getNestedExceptions()[0]->getMessage());
         }
@@ -57,7 +57,8 @@ final class GoogleAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        $envelope = $this->messageBus->dispatch(new AuthenticationSuccess($token->getUserIdentifier(), (string) $request->getClientIp()));
+        $message = new AuthenticationSuccess($token->getUserIdentifier(), (string) $request->getClientIp());
+        $envelope = $this->messageBus->dispatch($message);
 
         $handledStamp = $envelope->last(HandledStamp::class);
 
