@@ -11,17 +11,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[AsMessageHandler]
 final class AuthenticateHandler
 {
-    public const VALID_CODE = 'valid';
-    public const INVALID_CODE = 'invalid';
-    public const INVALID_CODE_MESSAGE = 'security.google.auth.code.invalid';
+    public const VALID_TOKEN = 'valid';
+    public const INVALID_TOKEN = 'invalid';
+    public const INVALID_TOKEN_MESSAGE = 'security.google.auth.token.invalid';
 
     public function __invoke(Authenticate $authenticate): ?UserInterface
     {
-        if (self::INVALID_CODE === $authenticate->token) {
-            throw new CustomUserMessageAuthenticationException(self::INVALID_CODE_MESSAGE);
+        if (self::INVALID_TOKEN === $authenticate->token) {
+            throw new CustomUserMessageAuthenticationException(self::INVALID_TOKEN_MESSAGE);
         }
 
-        if (self::VALID_CODE === $authenticate->token) {
+        if (self::VALID_TOKEN === $authenticate->token) {
             return new InMemoryUser('sofyco', null, ['ROLE_USER']);
         }
 

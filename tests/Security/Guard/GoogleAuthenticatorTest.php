@@ -10,11 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class GoogleAuthenticatorTest extends WebTestCase
 {
-    public function testInvalidCode(): void
+    public function testInvalidToken(): void
     {
-        $response = $this->sendRequest(token: AuthenticateHandler::INVALID_CODE);
+        $response = $this->sendRequest(token: AuthenticateHandler::INVALID_TOKEN);
 
-        self::assertSame(\json_encode(['message' => AuthenticateHandler::INVALID_CODE_MESSAGE]), (string) $response->getContent());
+        self::assertSame(\json_encode(['message' => AuthenticateHandler::INVALID_TOKEN_MESSAGE]), (string) $response->getContent());
         self::assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 
@@ -28,7 +28,7 @@ final class GoogleAuthenticatorTest extends WebTestCase
 
     public function testAuthenticationSuccess(): void
     {
-        $response = $this->sendRequest(token: AuthenticateHandler::VALID_CODE);
+        $response = $this->sendRequest(token: AuthenticateHandler::VALID_TOKEN);
 
         self::assertSame(\json_encode(['id' => 'sofyco']), (string) $response->getContent());
         self::assertSame(Response::HTTP_OK, $response->getStatusCode());
