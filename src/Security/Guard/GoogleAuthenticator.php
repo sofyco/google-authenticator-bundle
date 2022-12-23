@@ -29,13 +29,13 @@ final class GoogleAuthenticator extends AbstractAuthenticator
 
     public function supports(Request $request): ?bool
     {
-        return $request->query->has('token');
+        return $request->has('token');
     }
 
     public function authenticate(Request $request): Passport
     {
         try {
-            $envelope = $this->messageBus->dispatch(new Authenticate((string) $request->query->get('token')));
+            $envelope = $this->messageBus->dispatch(new Authenticate((string) $request->get('token')));
         } catch (HandlerFailedException $exception) {
             throw new CustomUserMessageAuthenticationException($exception->getNestedExceptions()[0]->getMessage());
         }
