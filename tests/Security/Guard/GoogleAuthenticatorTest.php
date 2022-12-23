@@ -38,7 +38,7 @@ final class GoogleAuthenticatorTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $client->request(Request::METHOD_GET, '/security/google', ['token' => $token]);
+        $client->request(Request::METHOD_POST, '/security/google', ['token' => $token]);
 
         return $client->getResponse();
     }
