@@ -21,7 +21,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPasspor
 
 final class GoogleAuthenticator extends AbstractAuthenticator
 {
-    public const FAILURE_MESSAGE = 'security.google.auth.error';
+    public const string FAILURE_MESSAGE = 'security.google.auth.error';
 
     public function __construct(private readonly MessageBusInterface $messageBus)
     {
@@ -37,7 +37,9 @@ final class GoogleAuthenticator extends AbstractAuthenticator
         try {
             $envelope = $this->messageBus->dispatch(new Authenticate((string) $request->request->get('token')));
         } catch (HandlerFailedException $exception) {
-            throw new CustomUserMessageAuthenticationException($exception->getNestedExceptions()[0]->getMessage());
+            $exception = \current($exception->getWrappedExceptions()) ?: new \RuntimeException('Empty exceptions list');
+
+            throw new CustomUserMessageAuthenticationException($exception->getMessage());
         }
 
         $handledStamp = $envelope->last(HandledStamp::class);

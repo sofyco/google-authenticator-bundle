@@ -8,9 +8,12 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ * @template-implements UserProviderInterface<UserInterface>
+ */
 final readonly class UserProvider implements UserProviderInterface
 {
-    public const USER_NOT_FOUND_MESSAGE = 'security.google.auth.user.notFound';
+    public const string USER_NOT_FOUND_MESSAGE = 'security.google.auth.user.notFound';
 
     public function __construct(private UserRepositoryInterface $userRepository)
     {
